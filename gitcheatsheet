@@ -1,0 +1,19 @@
+########### GIT SHEET #############
+unstage a change (accidental git rm add). This brings to working space
+
+git reset -- <filename>
+
+retrieve a deleted file in stage area (accidental git rm). This brings to working space
+
+git reset -- <filename>
+git checkout -- <filename>
+
+##do anything for multiple files:
+
+Write a simple scripts:
+
+del_files = git status : grep modified: | cut -c x-  (here x depends on length)
+OR
+del_files = git status : grep deleted: | cut -c x- 
+
+for files in $del_files:do; git reset/checkout -- $file; done
