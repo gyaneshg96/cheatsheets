@@ -1,0 +1,51 @@
+
+tips:	
+
+1. train step wise (partial fit, 		break. dataset)
+2. while creating features (esp. in regression) from 2 features, use product instead of sum
+3. using skewness (>0.5) or otherwise log transform to remove skewness of skewed variables
+4. remove outliers (use some metric based on scatter plot)
+
+grouping:
+train[['Age','Survived']].groupby(['Age'], as_index=False).mean()
+
+count of categories:
+train['Variable'].value_counts()
+
+sorting by column:
+df.sort_values()
+
+categorical variables
+dataset["Age"].map{}
+
+dummy_encoding:
+pd.get_dummies(dataset)
+
+fillna methods (replace nan):
+
+age_null_count = dataset['Age'].isnull().sum()
+age_null_random_list = np.random.randint(age_mean - age_stdv, age_mean + age_stdv, size=age_null_count)
+dataset['Age'][np.isnan(dataset['Age'])] = age_null_random_list
+
+dropna (remove nan):
+df.dropna(thresh=2)
+df.dropna(subset=['name', 'born']) (for specific column names)
+df.dropna(how='any', inplace=True) (for any NaN)
+
+view non numeric/object types
+df.loc[:,df.dtypes==object].head()
+
+Remove duplicates
+df.duplicated()
+
+Plotting:
+
+create multiple grids in FacetGrid using rows, cols, hue for different color
+
+a = sns.FacetGrid(full_data[0],'Survived',hue='Sex')
+//facetgrid is like subplot
+
+then use map to plot hist, scatter, plot, sns.plots
+a.map(plt.hist, 'Age')
+a.map(plt.scatter, 'Age','Fare') # arguments to the function
+a.map(sns.distplot, train)
